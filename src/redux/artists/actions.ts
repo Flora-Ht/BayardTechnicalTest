@@ -1,15 +1,15 @@
 import * as types from './types';
 
-export const increaseRequest = (data: number) => ({
-  type: types.INCREASE_REQUEST,
+export const getArtists = () => ({
+  type: types.GET_ARTISTS,
+});
+
+export const getArtistsSuccess = (data: Artist[]) => ({
+  type: types.GET_ARTISTS_SUCCESS,
   payload: data,
 });
 
-export const increaseSuccess = (data: number) => ({
-  type: types.INCREASE_REQUEST_SUCCESS,
-  payload: data,
-});
-
-export const increaseFailed = () => ({
-  type: types.INCREASE_REQUEST_FAILED,
+export const getArtistsFailure = (error: unknown) => ({
+  type: types.GET_ARTISTS_FAILURE,
+  payload: error,
 });

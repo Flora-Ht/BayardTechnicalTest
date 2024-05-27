@@ -3,30 +3,30 @@ import { IAction } from '../../interfaces/store';
 
 interface IState {
   loading: boolean;
-  artists: Artist[];
+  musicStyles: MusicStyle[];
   error?: unknown;
 }
 
 const initialState: IState = {
   loading: false,
-  artists: [],
+  musicStyles: [],
   error: undefined,
 };
 
-const artistsReducer = (state = initialState, action: IAction) => {
+const musicStylesReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case types.GET_ARTISTS:
+    case types.GET_MUSIC_STYLES:
       return {
         ...state,
         loading: true,
       };
-    case types.GET_ARTISTS_SUCCESS:
+    case types.GET_MUSIC_STYLES_SUCCESS:
       return {
         ...state,
         loading: false,
-        artists: action.payload,
+        musicStyles: action.payload,
       };
-    case types.GET_ARTISTS_FAILURE:
+    case types.GET_MUSIC_STYLES_FAILURE:
       return {
         ...state,
         loading: false,
@@ -39,4 +39,4 @@ const artistsReducer = (state = initialState, action: IAction) => {
   }
 };
 
-export default artistsReducer;
+export default musicStylesReducer;

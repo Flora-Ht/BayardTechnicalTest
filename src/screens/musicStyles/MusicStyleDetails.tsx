@@ -12,22 +12,24 @@ import {
 } from '../../redux/tracks/selectors';
 import TrackItem from '../components/TrackItem';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { MusicStylesNavigatorParamList } from '../../navigators/MusicStylesNavigatorParamList';
 
-const ArtistDetails = ({
+const MusicStyleDetails = ({
   route,
   navigation,
-}: NativeStackScreenProps<ArtistsNavigatorParamList, 'ArtistDetails'>) => {
-  const artist = route.params?.artist;
+}: NativeStackScreenProps<
+  MusicStylesNavigatorParamList,
+  'MusicStyleDetails'
+>) => {
+  const musicStyle = route.params?.musicStyle;
 
   const dispatch = useDispatch();
-  const tracks = useSelector(tracksSelector).sort((a, b) =>
-    a.title.localeCompare(b.title),
-  );
+  const tracks = useSelector(tracksSelector);
   const tracksLoading = useSelector(tracksLoadingSelector);
 
   useEffect(() => {
     navigation.setOptions({
-      title: artist.name,
+      title: musicStyle.title,
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
@@ -67,4 +69,4 @@ const ArtistDetails = ({
   );
 };
 
-export default ArtistDetails;
+export default MusicStyleDetails;

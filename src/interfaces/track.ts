@@ -1,5 +1,7 @@
 type Track = {
-  id: number;
-  name: string;
-  artist: number;
+  id: string;
+  title: string;
+  published: boolean;
+  genres: string[];
+  artists: string[];
 };

@@ -2,17 +2,17 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GlobalStyle } from '../../../utils/styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-type ArtistItemProps = {
-  artist: Artist;
-  onPress: (artist: Artist) => void;
+type MusicStyleItemProps = {
+  musicStyle: MusicStyle;
+  onPress: (musicStyle: MusicStyle) => void;
 };
 
-const ArtistItem = (props: ArtistItemProps) => {
+const MusicStyleItem = (props: MusicStyleItemProps) => {
   return (
     <TouchableOpacity
-      onPress={() => props.onPress(props.artist)}
+      onPress={() => props.onPress(props.musicStyle)}
       style={styles.container}>
-      <Text style={styles.artistName}>{props.artist.name}</Text>
+      <Text style={styles.artistName}>{props.musicStyle.title}</Text>
       <Ionicons
         name="chevron-forward-sharp"
         color={GlobalStyle.secondary}
@@ -22,7 +22,7 @@ const ArtistItem = (props: ArtistItemProps) => {
   );
 };
 
-export default ArtistItem;
+export default MusicStyleItem;
 
 const styles = StyleSheet.create({
   container: {

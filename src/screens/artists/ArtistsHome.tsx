@@ -4,52 +4,30 @@ import ArtistItem from './components/ArtistItem';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { GlobalStyle } from '../../utils/styles';
 import { ArtistsNavigatorParamList } from '../../navigators/ArtistsNavigatorParamList';
-
-const Artists: Artist[] = [
-  {
-    id: 1,
-    name: 'Evanescence',
-  },
-  {
-    id: 2,
-    name: 'Zayde Wolf',
-  },
-  {
-    id: 3,
-    name: 'Sia',
-  },
-  {
-    id: 4,
-    name: 'Isaak',
-  },
-  {
-    id: 5,
-    name: 'Hiroyuki Sawano',
-  },
-  {
-    id: 6,
-    name: 'Hatsune Miku',
-  },
-  {
-    id: 7,
-    name: 'Vanessa Paradis',
-  },
-  {
-    id: 8,
-    name: 'Imagine Dragons',
-  },
-  {
-    id: 9,
-    name: 'Radwimps',
-  },
-];
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getArtists } from '../../redux/artists/actions';
+import { artistsSelector } from '../../redux/artists/selectors';
+import { getTrackById, resetTracksList } from '../../redux/tracks/actions';
+import { resetFavoriteslist } from '../../redux/favorites/actions';
 
 const ArtistsHome = ({
   route,
   navigation,
 }: NativeStackScreenProps<ArtistsNavigatorParamList, 'ArtistsHome'>) => {
+  const dispatch = useDispatch();
+  const artists = useSelector(artistsSelector);
+
+  useEffect(() => {
+    dispatch(getArtists());
+  }, [navigation]);
+
   const onArtistPress = (artist: Artist) => {
+    dispatch(resetTracksList());
     navigation.navigate('ArtistDetails', { artist });
+    artist.tracks.forEach(track => {
+      dispatch(getTrackById(track));
+    });
   };
 
   return (
@@ -62,7 +40,7 @@ const ArtistsHome = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        {Artists.map(item => {
+        {artists.map(item => {
           return (
             <ArtistItem key={item.id} artist={item} onPress={onArtistPress} />
           );

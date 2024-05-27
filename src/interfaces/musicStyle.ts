@@ -1,5 +1,5 @@
-type Artist = {
+type MusicStyle = {
   id: string;
-  name: string;
+  title: string;
   tracks: string[];
 };
