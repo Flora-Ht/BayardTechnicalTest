@@ -23,7 +23,9 @@ const MusicStyleDetails = ({
   const musicStyle = route.params?.musicStyle;
 
   const dispatch = useDispatch();
-  const tracks = useSelector(tracksSelector);
+  const tracks = useSelector(tracksSelector).sort((a, b) =>
+    a.title.localeCompare(b.title),
+  );
   const tracksLoading = useSelector(tracksLoadingSelector);
 
   useEffect(() => {

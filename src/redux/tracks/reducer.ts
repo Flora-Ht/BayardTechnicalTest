@@ -39,6 +39,7 @@ const tracksReducer = (state = initialState, action: IAction) => {
         ...state,
         loading: false,
         tracks: [],
+        currentTrack: undefined,
       };
     case types.SET_CURRENT_TRACK:
       return {

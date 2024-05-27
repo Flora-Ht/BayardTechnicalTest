@@ -1,12 +1,13 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GlobalStyle } from '../../utils/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentTrackSelector } from '../../redux/tracks/selectors';
 import { RootNavigatorParamList } from '../../navigators/RootNavigatorParamList';
 import { AudioPlayer } from 'react-native-simple-audio-player';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Player = ({
   route,
@@ -15,9 +16,22 @@ const Player = ({
   const currentTrack = useSelector(currentTrackSelector);
 
   useEffect(() => {
-    console.log('Current track', currentTrack);
     if (currentTrack) {
-      navigation.setOptions({ title: currentTrack.title });
+      navigation.setOptions({
+        title: currentTrack.title,
+        headerLeft: () => (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.pop();
+            }}>
+            <Ionicons
+              name="caret-back-outline"
+              color={GlobalStyle.primary}
+              size={20}
+            />
+          </TouchableOpacity>
+        ),
+      });
     }
   }, [currentTrack]);
 
@@ -26,10 +40,10 @@ const Player = ({
       <View
         style={{
           flex: 1,
-          backgroundColor: '#313131',
+          backgroundColor: GlobalStyle.primary,
           justifyContent: 'center',
         }}>
-        {currentTrack ? (
+        {currentTrack && currentTrack.audiofile ? (
           <AudioPlayer url={currentTrack.audiofile[0].url} />
         ) : (
           <ActivityIndicator color={GlobalStyle.tertiary} />

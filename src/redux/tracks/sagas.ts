@@ -6,7 +6,6 @@ import { API_TOKEN, AIRTABLE_BASE_ID, TRACKS_TABLE_ID } from '@env';
 
 function fetchAPI(id: string) {
   const base = new Airtable({ apiKey: API_TOKEN }).base(AIRTABLE_BASE_ID);
-  let track: Track;
 
   return new Promise((resolve, reject) => {
     base(TRACKS_TABLE_ID).find(id, (error, record) => {
@@ -25,7 +24,6 @@ function fetchAPI(id: string) {
 }
 
 function* fetchTrack({ payload }: ReturnType<typeof actions.getTrackById>) {
-  console.log('fetchTrack');
   try {
     const track: Track = yield call(fetchAPI, payload);
     yield put(actions.getTrackByIdSuccess(track));
