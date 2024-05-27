@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -13,7 +12,7 @@ import {
 
 type TrackItemProps = {
   track: Track;
-  // onPress: (artist: Artist) => void;
+  onPress: (track: Track) => void;
 };
 
 const TrackItem = (props: TrackItemProps) => {
@@ -23,10 +22,6 @@ const TrackItem = (props: TrackItemProps) => {
   const isFavorite = () => {
     return favorites.find(favorite => favorite == props.track.id) != undefined;
   };
-
-  useEffect(() => {
-    console.log('Favorites', favorites);
-  }, [favorites]);
 
   const toggleFavorite = () => {
     if (isFavorite()) {
@@ -39,9 +34,15 @@ const TrackItem = (props: TrackItemProps) => {
 
   return (
     <TouchableOpacity
-      // onPress={() => props.onPress(props.artist)}
+      onPress={() => props.onPress(props.track)}
       style={styles.container}>
       <Text style={styles.artistName}>{props.track.title}</Text>
+
+      <TouchableOpacity
+        onPress={() => props.onPress(props.track)}
+        style={styles.playButton}>
+        <Ionicons name="play-sharp" color={GlobalStyle.primary} size={20} />
+      </TouchableOpacity>
 
       <TouchableOpacity onPress={toggleFavorite}>
         {isFavorite() ? (
@@ -85,5 +86,8 @@ const styles = StyleSheet.create({
     color: GlobalStyle.primary,
     fontSize: 15,
     flex: 1,
+  },
+  playButton: {
+    flex: 0.5,
   },
 });

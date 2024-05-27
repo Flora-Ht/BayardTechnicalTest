@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GlobalStyle } from '../../utils/styles';
 import { ArtistsNavigatorParamList } from '../../navigators/ArtistsNavigatorParamList';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetTracksList } from '../../redux/tracks/actions';
+import { resetTracksList, setCurrentTrack } from '../../redux/tracks/actions';
 import {
   tracksLoadingSelector,
   tracksSelector,
@@ -57,7 +57,16 @@ const ArtistDetails = ({
         }}>
         {!tracksLoading ? (
           tracks.map(item => {
-            return <TrackItem key={item.id} track={item} />;
+            return (
+              <TrackItem
+                key={item.id}
+                track={item}
+                onPress={() => {
+                  dispatch(setCurrentTrack(item));
+                  navigation.navigate('Player' as any, item);
+                }}
+              />
+            );
           })
         ) : (
           <ActivityIndicator size={'large'} color={GlobalStyle.accent} />

@@ -4,12 +4,14 @@ import { IAction } from '../../interfaces/store';
 interface IState {
   loading: boolean;
   tracks: Track[];
+  currentTrack?: Track;
   error?: unknown;
 }
 
 const initialState: IState = {
   loading: false,
   tracks: [],
+  currentTrack: undefined,
   error: undefined,
 };
 
@@ -37,6 +39,11 @@ const tracksReducer = (state = initialState, action: IAction) => {
         ...state,
         loading: false,
         tracks: [],
+      };
+    case types.SET_CURRENT_TRACK:
+      return {
+        ...state,
+        currentTrack: action.payload,
       };
 
     default: {

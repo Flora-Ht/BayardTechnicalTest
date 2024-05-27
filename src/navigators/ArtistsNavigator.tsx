@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ArtistDetails, ArtistsHome } from '../screens';
+import { ArtistDetails, ArtistsHome, Player } from '../screens';
 import { ArtistsNavigatorParamList } from './ArtistsNavigatorParamList';
 
 const ArtistsStack = createNativeStackNavigator<ArtistsNavigatorParamList>();

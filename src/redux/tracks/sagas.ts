@@ -17,6 +17,7 @@ function fetchAPI(id: string) {
           id: record?.id,
           title: record?.get('Title'),
           genres: record?.get('Genres'),
+          audiofile: record?.get('Audiofile'),
         });
       }
     });

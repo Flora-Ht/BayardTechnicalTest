@@ -1,19 +1,21 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { TabNavigator } from './src/navigators/TabNavigator';
 import { Provider } from 'react-redux';
-import { persistor, store } from './src/redux/store';
+import { store } from './src/redux/store';
+import { RootNavigator } from './src/navigators';
+
+// const useInitPlayer = () => {
+//   useEffect(() => {
+//     TrackPlayer.setupPlayer();
+
+//     return () => {
+//       TrackPlayer.reset();
+//     };
+//   }, []);
+// };
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -22,6 +24,8 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  // useInitPlayer();
+
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -29,7 +33,7 @@ function App(): React.JSX.Element {
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}
         />
-        <TabNavigator />
+        <RootNavigator />
       </NavigationContainer>
     </Provider>
   );

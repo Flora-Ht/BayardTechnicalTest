@@ -1,15 +1,13 @@
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ArtistItem from './components/ArtistItem';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { GlobalStyle } from '../../utils/styles';
 import { ArtistsNavigatorParamList } from '../../navigators/ArtistsNavigatorParamList';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArtists } from '../../redux/artists/actions';
 import { artistsSelector } from '../../redux/artists/selectors';
 import { getTrackById, resetTracksList } from '../../redux/tracks/actions';
-import { resetFavoriteslist } from '../../redux/favorites/actions';
 
 const ArtistsHome = ({
   route,

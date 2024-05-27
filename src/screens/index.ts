@@ -3,6 +3,7 @@ import ArtistsHome from './artists/ArtistsHome';
 import FavoritesHome from './favorites/FavoritesHome';
 import MusicStyleDetails from './musicStyles/MusicStyleDetails';
 import MusicStylesHome from './musicStyles/MusicStylesHome';
+import Player from './player/Player';
 
 export {
   ArtistsHome,
@@ -10,4 +11,5 @@ export {
   FavoritesHome,
   MusicStylesHome,
   MusicStyleDetails,
+  Player,
 };

@@ -5,14 +5,10 @@ import {
   favoritesSelector,
 } from '../../redux/favorites/selectors';
 import TrackItem from '../components/TrackItem';
-import { useEffect } from 'react';
 import { TabNavigatorParamList } from '../../navigators/TabNavigatorParamList';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import {
-  getFavTrackById,
-  resetFavoriteslist,
-} from '../../redux/favorites/actions';
 import { GlobalStyle } from '../../utils/styles';
+import { setCurrentTrack } from '../../redux/tracks/actions';
 
 const FavoritesHome = ({
   route,
@@ -21,11 +17,6 @@ const FavoritesHome = ({
   const dispatch = useDispatch();
   const favorites = useSelector(favoritesSelector);
   const favTracks = useSelector(favoriteTracksSelector);
-
-  useEffect(() => {
-    console.log('Favorites selector', favorites);
-    console.log('FavTracks selector', favTracks);
-  }, [favorites, favTracks]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -39,7 +30,16 @@ const FavoritesHome = ({
         }}>
         {favTracks && favTracks.length > 0 ? (
           favTracks.map(item => {
-            return <TrackItem key={item.id} track={item} />;
+            return (
+              <TrackItem
+                key={item.id}
+                track={item}
+                onPress={() => {
+                  dispatch(setCurrentTrack(item));
+                  navigation.navigate('Player' as any, item);
+                }}
+              />
+            );
           })
         ) : (
           <Text style={styles.textEmpty}>

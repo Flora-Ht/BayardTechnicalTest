@@ -18,3 +18,8 @@ export const getTrackByIdFailure = (error: unknown) => ({
 export const resetTracksList = () => ({
   type: types.RESET_TRACKS_LIST,
 });
+
+export const setCurrentTrack = (track: Track) => ({
+  type: types.SET_CURRENT_TRACK,
+  payload: track,
+});
